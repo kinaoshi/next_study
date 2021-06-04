@@ -27,7 +27,7 @@ export default function Home() {
   },[]);
 
   const handleOnClick = useCallback(() => {
-    alert("次は10からです")
+    alert("次は11からです")
   },[]);
 
   return (
