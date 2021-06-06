@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
@@ -12,33 +12,34 @@ import styles from "../styles/Home.module.css";
 // }
 
 export default function Home() {
-  const foo = 1;
-  const handleClick = useCallback((e) => {
-    e.preventDefault();
-    alert(foo);
-  },[]);
+  const [count, setCount] = useState(1);
+
+  const handleClick = (e) => {
+    setCount ((count) => count + 1);
+    setCount ((count) => count + 1);
+
+  };
   useEffect(() => {
-    console.log("マウント時");
     document.body.style.backgroundColor = "lightblue";
     return () => {
-      console.log("アンマウント時");
       document.body.style.backgroundColor = "";
     }
   },[]);
 
   const handleOnClick = useCallback(() => {
-    alert("次は11からです")
+    alert("次は12からです")
   },[]);
-
+  
   return (
     <div className={styles.container}>
       <Head>
         <title>Index page </title>
       </Head>
       <Header />
-      <a href="/about" onClick={handleClick}>
+      <h1>{count}</h1>
+      <button onClick={handleClick}>
         ボタン
-      </a>
+      </button>
     <button onClick = {handleOnClick}>学習状況</button>
       <Main page="index" />
 
