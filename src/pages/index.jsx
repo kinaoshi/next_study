@@ -14,17 +14,21 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   const [count, setCount] = useState(1);
 
-  const handleClick = (e) => {
-    setCount ((count) => count + 1);
-    setCount ((count) => count + 1);
+  const handleClick = useCallback((e) => {
+    if (count < 10) {
 
-  };
+      setCount ((count) => count + 1);
+    }
+    },[count]);
+
   useEffect(() => {
+    console.log(`マウント時:${count}`);
     document.body.style.backgroundColor = "lightblue";
     return () => {
+      console.log(`アンマウント時:${count}`);
       document.body.style.backgroundColor = "";
     }
-  },[]);
+  },[count]);
 
   const handleOnClick = useCallback(() => {
     alert("次は12からです")
