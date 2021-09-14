@@ -19,7 +19,7 @@ export default function Home() {
 	const handleClick = useCallback(
 		(e) => {
 			if (count < 10) {
-				setCount((count) => count + 1);
+				setCount((PrevCount) => PrevCount + 1);
 			}
 		},
 		[count]
@@ -41,8 +41,8 @@ export default function Home() {
 	}, []);
 	console.log(text);
   const handleDisplay = useCallback(() => {
-    setIsShow((isShow) => !isShow);
-  },[])
+		setIsShow((prevIsShow) => !prevIsShow);
+	}, []);
 	return (
 		<div className={styles.container}>
 			<Head>
