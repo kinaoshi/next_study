@@ -6,15 +6,23 @@ import { Header } from "../components/Header";
 import { Main } from "../components/Main";
 import styles from "../styles/Home.module.css";
 
-// const handleClick = (e) => {
-//   e.preventDefault();
-//   alert(123);
-// }
-
 export default function Home() {
 	const [count, setCount] = useState(1);
 	const [text, setText] = useState("");
+	const handleAdd=useCallback(()=>{
+		
+		setArray((prevArray)=>{
+			if(prevArray.some((item)=>item===text)){
+				alert("同じ要素が既に存在します");
+				return prevArray;
+			  }
+			  return[...prevArray,text];
+			 })
+			
+
+	  },[text]);
 	const [isShow, setIsShow] = useState(true);
+	const [array, setArray] = useState([]);
 
 	const handleClick = useCallback(
 		(e) => {
@@ -40,7 +48,7 @@ export default function Home() {
 		setText(e.target.value.trim());
 	}, []);
 	console.log(text);
-  const handleDisplay = useCallback(() => {
+	const handleDisplay = useCallback(() => {
 		setIsShow((prevIsShow) => !prevIsShow);
 	}, []);
 	return (
@@ -51,12 +59,15 @@ export default function Home() {
 			<Header />
 			{isShow ? <h1>{count}</h1> : null}
 			<button onClick={handleClick}>ボタン</button>
-			<button
-				onClick={handleDisplay}
-			>
-				{isShow ? "非表示" : "表示"}
-			</button>
+			<button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
 			<input type="text" value={text} onChange={handleChange} />
+			<button onClick={handleAdd}>追加</button>
+			<ul>
+				{array.map((item) => {
+					return <li key={item}>{item}</li>;
+				})}
+			</ul>
+			<div>次は、15から</div>
 
 			<Main page="index" />
 
